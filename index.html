@@ -127,20 +127,25 @@
       <h1 id="work-h">Work</h1>
       <p class="lede">Selected projects. Our clients stay anonymous; the problems and results are real.</p>
       <ol class="projects">
-        <li><a href="#work-pharma-forecasting"><span class="t">Forecasting disease incidence for a global pharmaceutical company</span><span class="s">Pharmaceutical</span></a></li>
-        <li><a href="#work-airline-pricing"><span class="t">Real-time pricing for a leading airline</span><span class="s">Aviation</span></a></li>
-        <li><a href="#work-telecom-retention"><span class="t">Improving client retention with AI</span><span class="s">Telecom</span></a></li>
-        <li><a href="#work-telecom-antennas"><span class="t">Pipeline and dashboard for a telecom company</span><span class="s">Telecom</span></a></li>
-        <li><a href="#work-ad-bidding"><span class="t">Automated ad bid optimizer</span><span class="s">E-commerce</span></a></li>
-        <li><a href="#work-population-projections"><span class="t">Real-time population projections dashboard</span><span class="s">International organization</span></a></li>
-        <li><a href="#work-workforce-logistics"><span class="t">Workforce optimization in logistics warehouses</span><span class="s">Logistics</span></a></li>
+        <li class="wide"><a href="#work-pharma-forecasting"><img src="assets/work/pharma-forecasting-640.webp" srcset="assets/work/pharma-forecasting-640.webp 640w, assets/work/pharma-forecasting-1280.webp 1280w" sizes="(max-width: 899px) 104px, 540px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">Pharmaceutical</span><span class="t">Forecasting disease incidence for a global pharmaceutical company</span></a></li>
+        <li><a href="#work-airline-pricing"><img src="assets/work/airline-pricing-640.webp" srcset="assets/work/airline-pricing-640.webp 640w, assets/work/airline-pricing-1280.webp 1280w" sizes="(max-width: 899px) 104px, 260px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">Aviation</span><span class="t">Real-time pricing for a leading airline</span></a></li>
+        <li><a href="#work-telecom-retention"><img src="assets/work/telecom-retention-640.webp" srcset="assets/work/telecom-retention-640.webp 640w, assets/work/telecom-retention-1280.webp 1280w" sizes="(max-width: 899px) 104px, 260px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">Telecom</span><span class="t">Improving client retention with AI</span></a></li>
+        <li><a href="#work-telecom-antennas"><img src="assets/work/telecom-antennas-640.webp" srcset="assets/work/telecom-antennas-640.webp 640w, assets/work/telecom-antennas-1280.webp 1280w" sizes="(max-width: 899px) 104px, 260px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">Telecom</span><span class="t">Pipeline and dashboard for a telecom company</span></a></li>
+        <li><a href="#work-ad-bidding"><img src="assets/work/ad-bidding-640.webp" srcset="assets/work/ad-bidding-640.webp 640w, assets/work/ad-bidding-1280.webp 1280w" sizes="(max-width: 899px) 104px, 260px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">E-commerce</span><span class="t">Automated ad bid optimizer</span></a></li>
+        <li><a href="#work-population-projections"><img src="assets/work/population-projections-640.webp" srcset="assets/work/population-projections-640.webp 640w, assets/work/population-projections-1280.webp 1280w" sizes="(max-width: 899px) 104px, 260px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">International organization</span><span class="t">Real-time population projections dashboard</span></a></li>
+        <li><a href="#work-workforce-logistics"><img src="assets/work/workforce-logistics-640.webp" srcset="assets/work/workforce-logistics-640.webp 640w, assets/work/workforce-logistics-1280.webp 1280w" sizes="(max-width: 899px) 104px, 260px" width="640" height="427" alt="" loading="lazy" decoding="async"><span class="s">Logistics</span><span class="t">Workforce optimization in logistics warehouses</span></a></li>
       </ol>
     </section>
 
     <article class="pane case" id="work-pharma-forecasting" data-section="work" aria-labelledby="c0-h">
-      <p class="back"><a href="#work">Work</a> · Pharmaceutical</p>
-      <h1 id="c0-h">Forecasting disease incidence for a global pharmaceutical company</h1>
-      <p class="lede">A global pharmaceutical company needed to know where and when cases of an infectious disease would rise. We built a system that forecasts incidence one and two months ahead for every region, with calibrated uncertainty ranges and early-warning alerts.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · Pharmaceutical</p>
+          <h1 id="c0-h">Forecasting disease incidence for a global pharmaceutical company</h1>
+          <p class="lede">A global pharmaceutical company needed to know where and when cases of an infectious disease would rise. We built a system that forecasts cases one and two months ahead in every region, with calibrated uncertainty and early-warning alerts.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/pharma-forecasting-640.webp" srcset="assets/work/pharma-forecasting-640.webp 640w, assets/work/pharma-forecasting-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="Earth seen from orbit, clouds over the ocean" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/view-of-earth-and-satellite-yZygONrUBe8" rel="noopener" target="_blank">NASA</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>Health authorities report cases weekly, but the signals that come before a surge (temperature, rainfall, humidity, vegetation, land use, the El Niño cycle, even online searches) are spread across a dozen sources that publish on different calendars. The company wanted forecasts for every region of several countries, with honest uncertainty, refreshed as soon as new data appears.</p></div>
         <div><h2>What we built</h2><p>Automated collectors gather surveillance reports, satellite climate and vegetation data, deforestation, El Niño indices, search trends and population, keeping a versioned monthly snapshot of each source. Gradient-boosted quantile models learn from a year of history per region and forecast the full range of likely cases; conformal calibration keeps those ranges honest. Every model is tested walk-forward and on an untouched holdout year before release, and forecasts reach the company through an API on AWS.</p></div>
@@ -149,9 +154,14 @@
     </article>
 
     <article class="pane case" id="work-airline-pricing" data-section="work" aria-labelledby="c1-h">
-      <p class="back"><a href="#work">Work</a> · Aviation</p>
-      <h1 id="c1-h">Real-time pricing for a leading airline</h1>
-      <p class="lede">One of Europe’s largest airlines priced thousands of flights by hand. We moved them to real-time pricing with our own custom-built algorithm, increasing revenue, enabling pricing by route and freeing the time of dozens of employees.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · Aviation</p>
+          <h1 id="c1-h">Real-time pricing for a leading airline</h1>
+          <p class="lede">One of Europe’s largest airlines priced thousands of flights by hand. We moved them to real-time pricing with our own custom-built algorithm, increasing revenue, enabling pricing by route and freeing the time of dozens of employees.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/airline-pricing-640.webp" srcset="assets/work/airline-pricing-640.webp 640w, assets/work/airline-pricing-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="An airliner’s wing above the clouds in the evening light" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/flying-airplane-over-white-clouds-OnXvKZldSJ0" rel="noopener" target="_blank">Jerry Zhang</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>Manual, static pricing leaves a lot of revenue on the table. The challenge was clear: automate pricing to capture that untapped potential. The airline’s reputation depended heavily on its prices, so any solution had to be transparent and accountable to stakeholders, and react to changes in demand.</p></div>
         <div><h2>What we built</h2><p>A transparent algorithm tailored to the airline, offering real-time pricing suggestions that balance revenue and demand. It beat the legacy model and kept stakeholders informed with explainable recommendations. A serverless design on Amazon Web Services, with a carefully built Python library, ensured scalability and accountability. The airline now adjusts prices confidently and autonomously, without compromising customer trust.</p></div>
@@ -160,9 +170,14 @@
     </article>
 
     <article class="pane case" id="work-telecom-retention" data-section="work" aria-labelledby="c2-h">
-      <p class="back"><a href="#work">Work</a> · Telecom</p>
-      <h1 id="c2-h">Improving client retention with AI</h1>
-      <p class="lede">A leading Spanish telecom was losing many customers every month: marketing kept growing sales, but retention stayed low. We built a predictive system that flags when clients may leave, enabling personalized engagement.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · Telecom</p>
+          <h1 id="c2-h">Improving client retention with AI</h1>
+          <p class="lede">A leading Spanish telecom was losing many customers every month: marketing kept growing sales, but retention stayed low. We built a predictive system that flags when clients may leave, enabling personalized engagement.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/telecom-retention-640.webp" srcset="assets/work/telecom-retention-640.webp 640w, assets/work/telecom-retention-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="Commuters on a crowded train, most of them on their phones" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/people-inside-train-5pkYWUDDthQ" rel="noopener" target="_blank">Hugh Han</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>A large customer base reaching saturation: a sign of market strength, but also a challenge. The company wanted to make marketing more cost-effective by focusing effort and budget on the customers most likely to convert, and to boost cross-selling with sharper, more tailored initiatives.</p></div>
         <div><h2>What we built</h2><p>A two-step AI model. First, we pre-processed the available data, filtering out noise so the model could discern genuine customer interest. Then we predicted cross-selling opportunities with a striking degree of accuracy. Because data alone isn’t actionable, the results went into an intuitive dashboard: sales representatives see at a glance which products fit each customer.</p></div>
@@ -171,9 +186,14 @@
     </article>
 
     <article class="pane case" id="work-telecom-antennas" data-section="work" aria-labelledby="c3-h">
-      <p class="back"><a href="#work">Work</a> · Telecom</p>
-      <h1 id="c3-h">Pipeline and dashboard for a telecom company</h1>
-      <p class="lede">A unified AI dashboard for a Spanish telecom that maps antenna performance issues and anticipates quality problems before customers notice them, on a data pipeline handling hundreds of gigabytes.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · Telecom</p>
+          <h1 id="c3-h">Pipeline and dashboard for a telecom company</h1>
+          <p class="lede">A unified AI dashboard for a Spanish telecom that maps antenna performance issues and anticipates quality problems before customers notice them, on a data pipeline handling hundreds of gigabytes.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/telecom-antennas-640.webp" srcset="assets/work/telecom-antennas-640.webp 640w, assets/work/telecom-antennas-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="A telecom mast with antennas and microwave dishes" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/gray-metal-tower-with-accessories-DgZxBnZeQo8" rel="noopener" target="_blank">Tony Stoddard</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>Day-to-day operations relied on combining Excel sheets and individual queries for antenna analytics. With more than 30,000 antennas to monitor, this was slow and made it hard to evaluate antenna connectivity and its impact on customers.</p></div>
         <div><h2>What we built</h2><p>A data ingestion system for loads of up to 800 GB, with a backend on Airflow and Docker that kept processing efficient, fast and transparent. It feeds a dashboard with a clear, geographically detailed daily view of antenna performance. The team now responds faster to connectivity issues, links antenna problems to the clients affected and improves the quality of service.</p></div>
@@ -182,9 +202,14 @@
     </article>
 
     <article class="pane case" id="work-ad-bidding" data-section="work" aria-labelledby="c4-h">
-      <p class="back"><a href="#work">Work</a> · E-commerce</p>
-      <h1 id="c4-h">Automated ad bid optimizer</h1>
-      <p class="lede">An e-commerce company spent a large share of its budget on ads without knowing whether bidding more would win a better position. We built an algorithm that calculates optimal bids in real time, taking seasonality into account.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · E-commerce</p>
+          <h1 id="c4-h">Automated ad bid optimizer</h1>
+          <p class="lede">An e-commerce company spent a large share of its budget on ads without knowing whether bidding more would win a better position. We built an algorithm that calculates optimal bids in real time, taking seasonality into account.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/ad-bidding-640.webp" srcset="assets/work/ad-bidding-640.webp 640w, assets/work/ad-bidding-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="A hand scrolling through products in a shopping app" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/person-scrolling-through-online-shopping-on-phone-Iywgu-a_eCs" rel="noopener" target="_blank">V H</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>The company invested millions in ad placement. One site ran an intricate auction where the highest bidder gets the best position, yet in some periods a higher bid did not lead to a higher placement. Without knowing how the ad algorithm worked, spending felt like a shot in the dark. They wanted a smarter strategy, adjusted to the data rather than flat across all periods.</p></div>
         <div><h2>What we built</h2><p>A predictive model that suggests bid prices, accounting for seasonality and daily fluctuations in demand. A lean design deployed on Google Cloud was ready for testing very quickly. The impact was twofold: better-informed ad spend in more than 50 markets, and people freed from the tedious bidding process. An internal dashboard compared the model with the old manual method.</p></div>
@@ -193,9 +218,14 @@
     </article>
 
     <article class="pane case" id="work-population-projections" data-section="work" aria-labelledby="c5-h">
-      <p class="back"><a href="#work">Work</a> · International organization</p>
-      <h1 id="c5-h">Real-time population projections dashboard</h1>
-      <p class="lede">A major international organization wanted every statistical office in the world to generate its own population forecasts. We built resilient dashboards that handle their inputs and computations, with security measures for incoming data.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · International organization</p>
+          <h1 id="c5-h">Real-time population projections dashboard</h1>
+          <p class="lede">A major international organization wanted every statistical office in the world to generate its own population forecasts. We built resilient dashboards that handle their inputs and computations, with security measures for incoming data.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/population-projections-640.webp" srcset="assets/work/population-projections-640.webp 640w, assets/work/population-projections-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="A crowd crossing a large intersection, seen from above" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/crowd-walking-across-shibuya-crossing-IBaVuZsJJTo" rel="noopener" target="_blank">Ryoji Iwata</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>The organization needed to democratize its demographic projections. Most were produced in-house, yet most countries hold the vital statistics of their own populations in their national statistical offices. They needed a scalable, responsive and resilient application that let thousands of statisticians run their own simulations on the web, without technical hurdles.</p></div>
         <div><h2>What we built</h2><p>Two web applications where users upload their data and receive population and vital-statistics projections, each with a personalized report, their data kept secure and the simulations running fast on the server. Behind them, the infrastructure runs hundreds of projections at once without compromising usability.</p></div>
@@ -204,9 +234,14 @@
     </article>
 
     <article class="pane case" id="work-workforce-logistics" data-section="work" aria-labelledby="c6-h">
-      <p class="back"><a href="#work">Work</a> · Logistics</p>
-      <h1 id="c6-h">Workforce optimization in logistics warehouses</h1>
-      <p class="lede">A logistics company allocated staff hours with fixed rules while demand for its products came and went. Our product-level demand forecasts made staff planning efficient and data-driven.</p>
+      <div class="case-head">
+        <div class="case-intro">
+          <p class="back"><a href="#work">Work</a> · Logistics</p>
+          <h1 id="c6-h">Workforce optimization in logistics warehouses</h1>
+          <p class="lede">A logistics company allocated staff hours with fixed rules while demand for its products came and went. Our product-level demand forecasts made staff planning efficient and data-driven.</p>
+        </div>
+        <figure class="case-photo"><img src="assets/work/workforce-logistics-640.webp" srcset="assets/work/workforce-logistics-640.webp 640w, assets/work/workforce-logistics-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="Workers walking through a large warehouse" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/workers-walking-through-warehouse-aisle-c_4eaGRDSVU" rel="noopener" target="_blank">Adrian Sulyok</a> on Unsplash</figcaption></figure>
+      </div>
       <div class="case-body">
         <div><h2>The challenge</h2><p>With many products facing intermittent demand, allocating the workforce was a constant challenge. Established procedures coped with daily fluctuations, but the company wanted more efficiency: the right amount of labor on the right days, without waste or shortfalls.</p></div>
         <div><h2>What we built</h2><p>A forecasting model tailored to their needs. With sparse data, we used imputation methods and, critically, combined the client’s domain knowledge with iterative adjustments. We went beyond forecasting, adding optimization methods to guide workforce scheduling, so they anticipate and respond to changing demand.</p></div>
@@ -259,10 +294,10 @@
       <p class="lede">An evaluation of your project and guidance through the process. Free of charge and without obligation.</p>
       <div class="contact">
         <dl class="details">
-          <div><dt>Email</dt><dd><a class="link" href="mailto:cimentadaj@gmail.com">cimentadaj@gmail.com</a></dd></div>
+          <div><dt>Email</dt><dd><a class="link" href="mailto:cimentadaj@cognitivalabs.eu">cimentadaj@cognitivalabs.eu</a></dd></div>
           <div><dt>Office</dt><dd>Calle Lavapiés 51, 5º dcha.<br>28012 Madrid, Spain</dd></div>
         </dl>
-        <form class="form" id="contact-form" action="mailto:cimentadaj@gmail.com" method="post" enctype="text/plain" novalidate>
+        <form class="form" id="contact-form" action="mailto:cimentadaj@cognitivalabs.eu" method="post" enctype="text/plain" novalidate>
           <div class="row">
             <label>First name<input name="first" autocomplete="given-name" required></label>
             <label>Last name<input name="last" autocomplete="family-name" required></label>

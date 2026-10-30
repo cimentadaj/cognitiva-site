@@ -67,12 +67,21 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+/* photos: the Work page's load once the home page has settled; a project's photo starts
+ * loading as soon as a link to it is pointed at or focused, so it is there when it opens */
+const eager = (img) => { if (img && img.loading !== 'eager') img.loading = 'eager'; };
+const photoOf = (a) => document.getElementById(a?.getAttribute('href')?.slice(1) || '')?.querySelector('.case-photo img');
+for (const type of ['pointerover', 'focusin']) {
+  document.addEventListener(type, (e) => eager(photoOf(e.target.closest?.('a[href^="#work-"]'))));
+}
+window.addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => document.querySelectorAll('.projects img').forEach(eager)));
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* the contact form: opens the visitor's email app with the message ready to send */
 const form = document.getElementById('contact-form');
 const hint = document.getElementById('form-hint');
-const EMAIL = 'cimentadaj@gmail.com';
+const EMAIL = 'cimentadaj@cognitivalabs.eu';
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const field = (name) => form.elements[name];

@@ -84,22 +84,33 @@ html.js .home.on { display: grid; }
 .step-d { font-size: var(--fs-sm); color: var(--faint); margin-top: 2px; }
 .step ul { margin-top: var(--s4); display: grid; gap: var(--s3); font-size: var(--fs-sm); color: var(--muted); line-height: 1.55; }
 
-/* ---------- work ---------- */
-.projects { margin-top: var(--s7); border-top: 1px solid var(--rule); max-width: 900px; }
-.projects a { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s5); padding: var(--s4) 0; border-bottom: 1px solid var(--rule); }
-.projects .t { font-size: var(--fs-lg); font-weight: 500; letter-spacing: -0.01em; transition: transform var(--dur) var(--ease); }
-.projects .s { font-size: var(--fs-sm); color: var(--faint); white-space: nowrap; }
-.projects a:hover .t, .projects a:focus-visible .t { transform: translateX(6px); }
+/* ---------- work: four photos to a row, the first project twice as wide. The photos
+ * are in grey until pointed at; the project pages show them in colour. ---------- */
+.projects { --gap: var(--s5); --ratio: 1.5; container-type: inline-size; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6) var(--gap); margin-top: var(--s7); }
+.projects .wide { grid-column: span 2; }
+.projects a { display: flex; flex-direction: column; }
+.projects img { display: block; width: 100%; height: calc((100cqw - 3 * var(--gap)) / 4 / var(--ratio)); object-fit: cover; margin-bottom: var(--s3); border-radius: 2px; background: var(--rule); filter: grayscale(1); transition: filter calc(var(--dur) * 2) var(--ease); }
+.projects a:hover img, .projects a:focus-visible img { filter: none; }
+@media (hover: none) { .projects img { filter: none; } }
+.projects .s { font-size: var(--fs-xs); color: var(--faint); }
+.projects .t { margin-top: 2px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
 
 .back { font-size: var(--fs-sm); color: var(--faint); margin-bottom: var(--s4); }
 .back a { color: var(--muted); border-bottom: 1px solid var(--rule-strong); }
 .back a:hover { color: var(--ink); border-color: var(--ink); }
 .case .lede { color: var(--ink); }
+/* the photo stands beside the title and summary, as tall as they are */
+.case-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr); gap: var(--s7); }
+.case-head + .case-body { margin-top: var(--s6); }
+.case-photo { margin: 0; display: flex; flex-direction: column; }
+.case-photo img { flex: 1 1 0; height: 0; min-height: 260px; width: 100%; object-fit: cover; border-radius: 2px; background: var(--rule); }
+.case-photo figcaption { margin-top: var(--s2); font-size: var(--fs-xs); color: var(--faint); }
+.case-photo figcaption a:hover { color: var(--muted); }
 .case-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s7); margin-top: var(--s7); }
 .case-body h2 { font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--s2); }
 .case-body p { color: var(--muted); max-width: var(--measure); }
 .stack { margin-top: var(--s6); font-size: var(--fs-sm); color: var(--faint); }
-.case-nav { margin-top: var(--s7); display: flex; justify-content: space-between; gap: var(--s5); border-top: 1px solid var(--rule); padding-top: var(--s4); font-size: var(--fs-sm); }
+.case-nav { margin-top: var(--s6); display: flex; justify-content: space-between; gap: var(--s5); border-top: 1px solid var(--rule); padding-top: var(--s4); font-size: var(--fs-sm); }
 .case-nav a { color: var(--muted); max-width: 45%; transition: color var(--dur) var(--ease); }
 .case-nav a:hover { color: var(--ink); }
 .case-nav .next { margin-left: auto; text-align: right; }
@@ -150,7 +161,9 @@ html.js .home.on { display: grid; }
   .pane { padding-top: var(--s6); padding-bottom: var(--s6); }
   .grid-2, .steps, .people, .case-body, .contact, .projects { margin-top: var(--s6); }
   .clients { margin-top: var(--s6); }
-  .projects a { padding: var(--s3) 0; }
+  .projects { --ratio: 1.8; row-gap: var(--s5); }
+  .case-head + .case-body { margin-top: var(--s5); }
+  .case-photo img { min-height: 210px; }
   .case-nav { margin-top: var(--s6); }
 }
 
@@ -160,12 +173,20 @@ html.js .home.on { display: grid; }
   .top { flex-direction: column; align-items: flex-start; gap: var(--s3); padding-top: var(--s5); position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--rule); padding-bottom: 0; }
   .nav { width: 100%; justify-content: space-between; gap: var(--s2); padding-bottom: var(--s2); font-size: 0.8125rem; }
   .nav a { white-space: nowrap; }
+  .pane { scroll-margin-top: 120px; }
   .nav a[href="#about"] { display: none; } /* the logo goes home */
   .home, html.js .home.on { display: block; }
   .home-mark { display: none; }
   .grid-2, .steps, .people, .case-body, .contact { grid-template-columns: minmax(0, 1fr); gap: var(--s6); }
-  .projects a { flex-direction: column; gap: 2px; }
-  .projects .s { white-space: normal; }
+  .projects { grid-template-columns: minmax(0, 1fr); gap: 0; border-top: 1px solid var(--rule); }
+  .projects .wide { grid-column: auto; }
+  .projects a { display: grid; grid-template-columns: 104px minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; column-gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--rule); }
+  .projects img { grid-row: 1 / span 2; width: 104px; height: 70px; margin: 0; }
+  .projects .s { align-self: end; }
+  .projects .t { align-self: start; }
+  .case-head { display: block; }
+  .case-photo { margin-top: var(--s5); }
+  .case-photo img { flex: none; height: auto; min-height: 0; aspect-ratio: 3 / 2; }
   .form .row { grid-template-columns: minmax(0, 1fr); }
   .foot { padding-top: var(--s5); padding-bottom: var(--s5); }
 }
@@ -179,7 +200,9 @@ html.js .home.on { display: grid; }
 /* the shortest laptop screens (720 px): project pages a touch tighter still */
 @media (min-width: 900px) and (max-height: 740px) {
   .case .lede { font-size: var(--fs-md); }
-  .case-body { margin-top: var(--s5); }
+  .projects { --ratio: 2.2; }
+  .case-photo img { min-height: 160px; }
+  .case-head + .case-body { margin-top: var(--s4); }
   .stack { margin-top: var(--s4); }
   .case-nav { margin-top: var(--s5); }
 }
