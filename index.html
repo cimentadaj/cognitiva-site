@@ -3,6 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    /* first visit: browsers that prefer Spanish (or Catalan, Galician, Basque) go to the
+     * Spanish page, and so do browsers in Spain that list neither language; a choice made
+     * with the EN/ES link is remembered */
+    try {
+      var lang = localStorage.getItem('lang');
+      if (!lang) {
+        var prefs = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < prefs.length && !lang; i++) {
+          var l = String(prefs[i]).toLowerCase().slice(0, 2);
+          if (l === 'es' || l === 'ca' || l === 'gl' || l === 'eu') lang = 'es';
+          else if (l === 'en') lang = 'en';
+        }
+        if (!lang && /^(Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta)$/.test(Intl.DateTimeFormat().resolvedOptions().timeZone)) lang = 'es';
+      }
+      if (lang === 'es') location.replace('es/' + location.hash);
+    } catch (e) { /* no storage: stay in English */ }
+  </script>
   <title>Cognitiva Labs · Boutique AI consultancy, Madrid</title>
   <meta name="description" content="Cognitiva Labs is a boutique AI consultancy in Madrid. AI strategy, big data, data science and MLOps: we assess, suggest and refine alongside your business until we land on a solution that adds value.">
   <meta name="theme-color" content="#F6F5F1" media="(prefers-color-scheme: light)">
@@ -10,6 +28,10 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Cognitiva Labs · Boutique AI consultancy, Madrid">
   <meta property="og:description" content="We focus on value — AI is our tool. Real innovation, tangible results.">
+  <meta property="og:locale" content="en_GB">
+  <link rel="alternate" hreflang="en" href="https://cognitivalabs.eu/">
+  <link rel="alternate" hreflang="es" href="https://cognitivalabs.eu/es/">
+  <link rel="alternate" hreflang="x-default" href="https://cognitivalabs.eu/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +53,7 @@
       <a href="#team">Team</a>
       <a href="#contact">Contact</a>
     </nav>
+    <p class="lang"><span aria-current="true">EN</span><a href="es/" hreflang="es" lang="es" aria-label="Español">ES</a></p>
   </header>
 
   <main class="panes" id="main" tabindex="-1">
