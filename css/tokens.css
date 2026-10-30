@@ -1,0 +1,53 @@
+/* tokens.css — Cognitiva Labs: paper and ink, like the logo. Geist for text, Geist Mono
+ * only for small numbers. No accent colour: the logo's dots are the one motif.
+ * Dark mode follows the system. */
+:root {
+  --bg:          #F7F6F3;
+  --surface:     #FFFFFF;
+  --ink:         #111110;
+  --muted:       #5C5B57;  /* 6.6:1 on --bg */
+  --faint:       #8F8D87;  /* decoration and small numbers only */
+  --rule:        #E4E2DC;
+  --rule-strong: #CBC8BF;
+  --mark:        #D9D6CD;  /* the large mark on the home page */
+  --select:      #E6E3DA;
+
+  --font: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --fs-xs: 0.75rem;   /* 12 */
+  --fs-sm: 0.875rem;  /* 14 */
+  --fs-md: 1rem;      /* 16 body */
+  --fs-lg: 1.1875rem; /* 19 lede */
+  --fs-xl: 1.75rem;   /* 28 section titles */
+  --fs-hero: clamp(2.25rem, 1.2rem + 3vw, 4rem);
+  --lh: 1.6;
+  --lh-tight: 1.15;
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+  --top-h: 76px;
+  --foot-h: 48px;
+  --page: 1200px;
+  --measure: 62ch;
+  --radius: 999px;     /* buttons are pills, like the logo's dots */
+
+  --dur: 180ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:          #0E0E0D;
+    --surface:     #161615;
+    --ink:         #EDEBE6;
+    --muted:       #A5A39D;
+    --faint:       #74726D;
+    --rule:        #262523;
+    --rule-strong: #3B3A37;
+    --mark:        #2A2927;
+    --select:      #33312D;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur: 1ms; }
+}
