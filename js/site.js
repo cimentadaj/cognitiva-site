@@ -98,10 +98,12 @@ window.addEventListener('load', () => (window.requestIdleCallback || setTimeout)
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* the contact form: opens the visitor's email app with the message ready to send */
+/* the contact form: opens the visitor's email app with the message ready to send. It has no
+ * action (a mailto: action is "insecure" on https), so Send stays off until this runs */
 const form = document.getElementById('contact-form');
 const hint = document.getElementById('form-hint');
 const EMAIL = 'cimentadaj@cognitivalabs.eu';
+form.querySelector('[type="submit"]').disabled = false;
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const field = (name) => form.elements[name];

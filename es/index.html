@@ -302,7 +302,7 @@
           <div><dt>Email</dt><dd><a class="link" href="mailto:cimentadaj@cognitivalabs.eu">cimentadaj@cognitivalabs.eu</a></dd></div>
           <div><dt>Oficina</dt><dd>Calle Lavapiés 51, 5º dcha.<br>28012 Madrid, España</dd></div>
         </dl>
-        <form class="form" id="contact-form" action="mailto:cimentadaj@cognitivalabs.eu" method="post" enctype="text/plain" novalidate>
+        <form class="form" id="contact-form" novalidate>
           <div class="row">
             <label>Nombre<input name="first" autocomplete="given-name" required></label>
             <label>Apellidos<input name="last" autocomplete="family-name" required></label>
@@ -310,7 +310,7 @@
           <label>Email<input name="email" type="email" autocomplete="email" required></label>
           <label>Mensaje<textarea name="message" rows="4" required placeholder="¿Qué te gustaría que la IA hiciera por tu negocio?"></textarea></label>
           <p class="form-foot">
-            <button class="btn" type="submit">Enviar</button>
+            <button class="btn" type="submit" disabled>Enviar</button>
             <span class="hint" id="form-hint" role="status">Abre tu aplicación de correo con el mensaje listo para enviar.</span>
           </p>
         </form>

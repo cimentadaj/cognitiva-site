@@ -320,7 +320,7 @@
           <div><dt>Email</dt><dd><a class="link" href="mailto:cimentadaj@cognitivalabs.eu">cimentadaj@cognitivalabs.eu</a></dd></div>
           <div><dt>Office</dt><dd>Calle Lavapiés 51, 5º dcha.<br>28012 Madrid, Spain</dd></div>
         </dl>
-        <form class="form" id="contact-form" action="mailto:cimentadaj@cognitivalabs.eu" method="post" enctype="text/plain" novalidate>
+        <form class="form" id="contact-form" novalidate>
           <div class="row">
             <label>First name<input name="first" autocomplete="given-name" required></label>
             <label>Last name<input name="last" autocomplete="family-name" required></label>
@@ -328,7 +328,7 @@
           <label>Email<input name="email" type="email" autocomplete="email" required></label>
           <label>Message<textarea name="message" rows="4" required placeholder="What would you like AI to do for your business?"></textarea></label>
           <p class="form-foot">
-            <button class="btn" type="submit">Send</button>
+            <button class="btn" type="submit" disabled>Send</button>
             <span class="hint" id="form-hint" role="status">Opens your email app with the message ready to send.</span>
           </p>
         </form>
