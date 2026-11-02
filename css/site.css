@@ -162,7 +162,7 @@ html.js .home.on { display: grid; }
 /* ---------- mid widths ---------- */
 @media (min-width: 900px) and (max-width: 1199px) {
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s7); }
-  .people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .people { gap: var(--s5); } /* four cards in a row still: two rows of portraits would not fit */
   .home { grid-template-columns: minmax(0, 1fr) minmax(0, 0.45fr); }
 }
 
