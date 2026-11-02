@@ -152,13 +152,13 @@
         <div class="case-intro">
           <p class="back"><a href="#work">Proyectos</a> · Farmacéutico</p>
           <h1 id="c0-h">Previsión de enfermedades para una farmacéutica global</h1>
-          <p class="lede">Una farmacéutica global necesitaba saber dónde y cuándo aumentarían los casos de una enfermedad infecciosa. Construimos un sistema que prevé los casos con uno y dos meses de antelación en cada región, con incertidumbre calibrada y alertas tempranas.</p>
+          <p class="lede">Una farmacéutica global necesitaba saber dónde y cuándo aumentarían los casos de una enfermedad infecciosa. Construimos un sistema que prevé los casos en cada región, con rangos de incertidumbre honestos y alertas tempranas.</p>
         </div>
         <figure class="case-photo"><img src="../assets/work/pharma-forecasting-640.webp" srcset="../assets/work/pharma-forecasting-640.webp 640w, ../assets/work/pharma-forecasting-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="La Tierra vista desde la órbita, con nubes sobre el océano" loading="lazy" decoding="async"><figcaption>Foto: <a href="https://unsplash.com/photos/view-of-earth-and-satellite-yZygONrUBe8" rel="noopener" target="_blank">NASA</a> en Unsplash</figcaption></figure>
       </div>
       <div class="case-body">
-        <div><h2>El reto</h2><p>Las autoridades sanitarias notifican los casos cada semana, pero las señales que anticipan un repunte (temperatura, lluvia, humedad, vegetación, uso del suelo, el ciclo de El Niño e incluso las búsquedas en internet) están repartidas en una docena de fuentes con calendarios distintos. La empresa quería previsiones para cada región de varios países, con una incertidumbre honesta y actualizadas en cuanto llegan datos nuevos.</p></div>
-        <div><h2>Lo que construimos</h2><p>Recolectores automáticos reúnen informes de vigilancia, clima y vegetación por satélite, deforestación, El Niño, búsquedas y población, con una versión mensual de cada fuente. Modelos cuantílicos de gradient boosting aprenden de un año de historia por región y prevén todo el rango de casos probables; la calibración conformal mantiene esos rangos honestos. Cada modelo se valida en walk-forward y en un año reservado antes de publicarse, y las previsiones llegan a la empresa por una API en AWS.</p></div>
+        <div><h2>El reto</h2><p>Las autoridades sanitarias notifican los casos cada semana, pero las señales que anticipan un repunte están repartidas en una docena de fuentes con calendarios distintos. La empresa quería previsiones para cada región de varios países, con una incertidumbre honesta y actualizadas en cuanto llegan datos nuevos.</p></div>
+        <div><h2>Lo que construimos</h2><p>Recolectores automáticos reúnen informes de vigilancia y datos públicos ambientales y de población, con una versión de cada fuente. Modelos de machine learning prevén todo el rango de casos probables en cada región, con una incertidumbre que se sostiene en la práctica. Cada modelo se valida con datos que nunca ha visto antes de publicarse, y las previsiones llegan a la empresa por una API en AWS.</p></div>
       </div>
       <p class="stack">Desarrollado con Python, CatBoost, Google Earth Engine, MLflow, PostgreSQL y AWS.</p>
     </article>

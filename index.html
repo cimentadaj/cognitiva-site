@@ -170,13 +170,13 @@
         <div class="case-intro">
           <p class="back"><a href="#work">Work</a> · Pharmaceutical</p>
           <h1 id="c0-h">Forecasting disease incidence for a global pharmaceutical company</h1>
-          <p class="lede">A global pharmaceutical company needed to know where and when cases of an infectious disease would rise. We built a system that forecasts cases one and two months ahead in every region, with calibrated uncertainty and early-warning alerts.</p>
+          <p class="lede">A global pharmaceutical company needed to know where and when cases of an infectious disease would rise. We built a system that forecasts cases in every region, with honest uncertainty ranges and early-warning alerts.</p>
         </div>
         <figure class="case-photo"><img src="assets/work/pharma-forecasting-640.webp" srcset="assets/work/pharma-forecasting-640.webp 640w, assets/work/pharma-forecasting-1280.webp 1280w" sizes="(max-width: 899px) 100vw, 460px" width="1280" height="853" alt="Earth seen from orbit, clouds over the ocean" loading="lazy" decoding="async"><figcaption>Photo: <a href="https://unsplash.com/photos/view-of-earth-and-satellite-yZygONrUBe8" rel="noopener" target="_blank">NASA</a> on Unsplash</figcaption></figure>
       </div>
       <div class="case-body">
-        <div><h2>The challenge</h2><p>Health authorities report cases weekly, but the signals that come before a surge (temperature, rainfall, humidity, vegetation, land use, the El Niño cycle, even online searches) are spread across a dozen sources that publish on different calendars. The company wanted forecasts for every region of several countries, with honest uncertainty, refreshed as soon as new data appears.</p></div>
-        <div><h2>What we built</h2><p>Automated collectors gather surveillance reports, satellite climate and vegetation data, deforestation, El Niño indices, search trends and population, keeping a versioned monthly snapshot of each source. Gradient-boosted quantile models learn from a year of history per region and forecast the full range of likely cases; conformal calibration keeps those ranges honest. Every model is tested walk-forward and on an untouched holdout year before release, and forecasts reach the company through an API on AWS.</p></div>
+        <div><h2>The challenge</h2><p>Health authorities report cases weekly, but the signals that come before a surge are spread across a dozen sources that publish on different calendars. The company wanted forecasts for every region of several countries, with honest uncertainty, refreshed as soon as new data appears.</p></div>
+        <div><h2>What we built</h2><p>Automated collectors gather surveillance reports and public environmental and population data, keeping a versioned snapshot of each source. Machine learning models forecast the full range of likely cases in every region, with uncertainty that holds up in practice. Every model is tested on data it has never seen before release, and forecasts reach the company through an API on AWS.</p></div>
       </div>
       <p class="stack">Built with Python, CatBoost, Google Earth Engine, MLflow, PostgreSQL and AWS.</p>
     </article>
