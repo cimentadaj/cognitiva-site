@@ -125,18 +125,14 @@ html.js .home.on { display: grid; }
 .case-nav .next { margin-left: auto; text-align: right; }
 
 /* ---------- team ---------- */
-.people { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6); margin-top: var(--s7); }
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s6); margin-top: var(--s7); }
 .person { display: flex; flex-direction: column; align-items: flex-start; }
-.initials { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; border: 1px solid var(--ink); font: 500 var(--fs-xs)/1 var(--mono); letter-spacing: 0.04em; margin-bottom: var(--s4); }
-.person.placeholder .initials { border-style: dashed; border-color: var(--rule-strong); }
 /* portraits come from tools/portrait.py, so every face has the same framing and tone */
 .portrait { display: block; width: 88px; height: 88px; border-radius: 50%; object-fit: cover; background: var(--rule); margin-bottom: var(--s4); }
 .person h2 { font-size: var(--fs-md); font-weight: 600; }
 .person .role { font-size: var(--fs-sm); color: var(--faint); margin-top: 2px; }
 .person .bio { font-size: var(--fs-sm); color: var(--muted); margin-top: var(--s3); line-height: 1.55; flex: 1; }
 .person .link { margin-top: var(--s4); }
-.person.placeholder h2, .person.placeholder .role, .person.placeholder .bio, .person.placeholder .link { color: var(--faint); }
-.person.placeholder .link { border-color: var(--rule); }
 
 /* ---------- contact ---------- */
 .contact { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--s8); margin-top: var(--s7); align-items: start; }
@@ -162,7 +158,7 @@ html.js .home.on { display: grid; }
 /* ---------- mid widths ---------- */
 @media (min-width: 900px) and (max-width: 1199px) {
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s7); }
-  .people { gap: var(--s5); } /* four cards in a row still: two rows of portraits would not fit */
+  .people { gap: var(--s5); } /* three cards in a row still: two rows of portraits would not fit */
   .home { grid-template-columns: minmax(0, 1fr) minmax(0, 0.45fr); }
 }
 
