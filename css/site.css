@@ -80,6 +80,9 @@ html.js .home.on { display: grid; }
 .item { border-top: 1px solid var(--rule); padding-top: var(--s4); }
 .item h2 { font-size: var(--fs-md); font-weight: 600; margin-bottom: var(--s2); }
 .item p { color: var(--muted); max-width: var(--measure); }
+/* the first service spans the row, one paragraph over each of the two columns below */
+.grid-2 .wide { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s7); align-content: start; }
+.grid-2 .wide h2 { grid-column: 1 / -1; }
 
 /* ---------- process: four steps on a line, a dot each ---------- */
 .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6); margin-top: var(--s7); }
@@ -124,8 +127,10 @@ html.js .home.on { display: grid; }
 /* ---------- team ---------- */
 .people { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6); margin-top: var(--s7); }
 .person { display: flex; flex-direction: column; align-items: flex-start; }
-.initials { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--ink); font: 500 var(--fs-xs)/1 var(--mono); letter-spacing: 0.04em; margin-bottom: var(--s4); }
+.initials { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; border: 1px solid var(--ink); font: 500 var(--fs-xs)/1 var(--mono); letter-spacing: 0.04em; margin-bottom: var(--s4); }
 .person.placeholder .initials { border-style: dashed; border-color: var(--rule-strong); }
+/* portraits come from tools/portrait.py, so every face has the same framing and tone */
+.portrait { display: block; width: 88px; height: 88px; border-radius: 50%; object-fit: cover; background: var(--rule); margin-bottom: var(--s4); }
 .person h2 { font-size: var(--fs-md); font-weight: 600; }
 .person .role { font-size: var(--fs-sm); color: var(--faint); margin-top: 2px; }
 .person .bio { font-size: var(--fs-sm); color: var(--muted); margin-top: var(--s3); line-height: 1.55; flex: 1; }
@@ -161,6 +166,12 @@ html.js .home.on { display: grid; }
   .home { grid-template-columns: minmax(0, 1fr) minmax(0, 0.45fr); }
 }
 
+/* ---------- screens under 900 px tall: five services fit with the smaller text ---------- */
+@media (min-width: 900px) and (max-height: 899px) {
+  .item p { font-size: var(--fs-sm); line-height: 1.55; }
+  .grid-2 { row-gap: var(--s5); }
+}
+
 /* ---------- short laptop screens: a little tighter ---------- */
 @media (min-width: 900px) and (max-height: 820px) {
   :root { --top-h: 64px; }
@@ -185,6 +196,7 @@ html.js .home.on { display: grid; }
   .home, html.js .home.on { display: block; }
   .home-mark { display: none; }
   .grid-2, .steps, .people, .case-body, .contact { grid-template-columns: minmax(0, 1fr); gap: var(--s6); }
+  .grid-2 .wide { grid-template-columns: minmax(0, 1fr); row-gap: var(--s3); }
   .projects { grid-template-columns: minmax(0, 1fr); gap: 0; border-top: 1px solid var(--rule); }
   .projects .wide { grid-column: auto; }
   .projects a { display: grid; grid-template-columns: 104px minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; column-gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--rule); }
@@ -209,9 +221,10 @@ html.js .home.on { display: grid; }
   html.js .pane, html:not(.js) .pane { display: block !important; page-break-after: always; }
 }
 
-/* the shortest laptop screens (720 px): project pages a touch tighter still */
+/* the shortest laptop screens (720 px): project pages and services a touch tighter still */
 @media (min-width: 900px) and (max-height: 740px) {
   .case .lede { font-size: var(--fs-md); }
+  .grid-2 { margin-top: var(--s5); row-gap: var(--s4); }
   .projects { --ratio: 2.2; }
   .case-photo img { min-height: 160px; }
   .case-head + .case-body { margin-top: var(--s4); }
