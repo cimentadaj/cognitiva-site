@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>Cognitiva Labs</title>
+  <link rel="icon" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap">
+  <style>
+    :root { --bg: #F7F6F3; --ink: #111110; --muted: #5C5B57; --faint: #8F8D87; --rule: #E4E2DC; --night: #0E0E0D; --night-ink: #EDEBE6; --night-muted: #A5A39D; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { background: var(--night); color: var(--night-ink); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden;
+           -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    #deck { position: fixed; inset: 0; display: none; }
+    #deck canvas { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0 20px 60px rgba(0,0,0,.45); background: var(--bg); }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: center; padding: 10px 18px; font: 13px/1 'Geist Mono', ui-monospace, monospace; color: var(--night-muted); }
+    .bar button { all: unset; cursor: pointer; padding: 6px 10px; color: var(--night-ink); }
+    .bar button:disabled { opacity: .3; cursor: default; }
+    .msg { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .msg .box { max-width: 560px; }
+    .msg h1 { font-size: 34px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.2; }
+    .msg p { margin-top: 14px; font-size: 18px; line-height: 1.5; color: var(--night-muted); }
+    .msg .brand { font: 13px/1 'Geist Mono', ui-monospace, monospace; color: var(--night-muted); margin-bottom: 26px; letter-spacing: .5px; }
+    .hide { display: none !important; }
+    @media print { body * { display: none !important; } body::after { content: "Este documento no se puede imprimir."; display: block; padding: 40px; font: 20px sans-serif; color: #000; } }
+  </style>
+</head>
+<body>
+  <div id="deck" aria-label="Cognitiva Labs">
+    <canvas id="c"></canvas>
+    <div class="bar"><span id="who"></span><span><button id="prev" aria-label="Anterior">←</button><span id="count"></span><button id="next" aria-label="Siguiente">→</button></span></div>
+  </div>
+  <div class="msg" id="msg"><div class="box"><p class="brand">COGNITIVA LABS</p><h1 id="mt">Cargando…</h1><p id="mp"></p></div></div>
+
+  <script>
+  (() => {
+    /* Filled in by tools/deck_links.py build. Everything here is public: the deck key only
+     * travels inside each personal, signed link (in the #fragment, never sent to a server). */
+    const PUBKEY = {"kty": "EC", "crv": "P-256", "x": "sSGDjFfQDp6z9-BNcjc7OvkVyn9sa-8Ur09ffyXhSyY", "y": "PMq_5-aH3HGDYTI-O_a1qWkOkAIXH80Wugos8UjLtpo", "ext": true};
+    const WEBHOOK = "https://oxygen-agent.com/api/webhooks/tables/1efa4209-8c90-4d6e-abeb-bebf51418f58/tw_QU_2WU3RzXJMws9bEZCX8h9E";
+    const SLIDES = {"es": 8, "en": 8};
+
+    const T = {
+      es: { loading: 'Cargando…', bad: 'Este enlace no es válido.', badp: 'Puede que esté incompleto. Escríbeme y te mando uno nuevo.',
+            exp: 'Este enlace ha caducado.', expp: 'Por privacidad, cada enlace dura unas horas desde que se abre. Si quieres volver a verlo, escríbeme y te mando uno nuevo.',
+            err: 'No se ha podido cargar la presentación.', errp: 'Prueba a recargar la página en unos segundos.', print: 'Este documento no se puede imprimir.' },
+      en: { loading: 'Loading…', bad: 'This link is not valid.', badp: 'It may be incomplete. Message me and I will send you a new one.',
+            exp: 'This link has expired.', expp: 'For privacy, each link lasts a few hours from first opening. If you would like to see it again, message me and I will send a new one.',
+            err: 'The presentation could not be loaded.', errp: 'Try reloading the page in a few seconds.', print: 'This document cannot be printed.' }
+    };
+    const $ = id => document.getElementById(id);
+    const b64d = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; const b = atob(s); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; };
+    const now = () => Date.now() / 1000;
+    let P = null, t = T.es;
+
+    /* ---- events to the OXYGEN Deck views table (plain text JSON: no CORS preflight) ---- */
+    const send = (event, extra = {}, beacon = false) => {
+      if (!P) return;
+      const body = JSON.stringify(Object.assign({
+        event, link_id: P.i, row_id: P.r, name: P.n, company: P.c, lang: P.l,
+        user_agent: navigator.userAgent.slice(0, 180), ts: new Date().toISOString(),
+        nonce: Math.random().toString(36).slice(2, 10)
+      }, extra));
+      try {
+        if (beacon && navigator.sendBeacon) { navigator.sendBeacon(WEBHOOK, new Blob([body], { type: 'text/plain' })); return; }
+        fetch(WEBHOOK, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' }, keepalive: true, mode: 'no-cors' }).catch(() => {});
+      } catch (e) { /* tracking never breaks viewing */ }
+    };
+
+    const show = (title, text) => { $('deck').style.display = 'none'; $('msg').classList.remove('hide'); $('mt').textContent = title; $('mp').textContent = text || ''; };
+    const expire = reason => { bitmaps.length = 0; show(t.exp, t.expp); send('expired', { reason }); };
+
+    /* ---- view-only: no context menu, drag, selection, save or print shortcuts ---- */
+    ['contextmenu', 'dragstart', 'selectstart', 'copy', 'cut'].forEach(ev => addEventListener(ev, e => e.preventDefault()));
+    addEventListener('keydown', e => {
+      const k = (e.key || '').toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'c', 'u', 'a'].includes(k)) { e.preventDefault(); e.stopPropagation(); }
+      if (k === 'printscreen') { e.preventDefault(); }
+    }, true);
+    addEventListener('beforeprint', () => send('print_attempt'));
+
+    /* ---- slides ---- */
+    const bitmaps = []; let i = 0, shownAt = Date.now();
+    const cv = $('c'), cx = cv.getContext('2d');
+    const draw = () => {
+      const bm = bitmaps[i]; if (!bm) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const W = innerWidth - 32, H = innerHeight - 64;
+      const s = Math.min(W / bm.width, H / bm.height);
+      const w = Math.round(bm.width * s), h = Math.round(bm.height * s);
+      cv.style.width = w + 'px'; cv.style.height = h + 'px';
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx.drawImage(bm, 0, 0, w, h);
+      /* watermark: who it was sent to, repeated faintly across the slide */
+      const mark = `${P.n} · ${P.c} · ${new Date().toLocaleDateString(P.l === 'en' ? 'en-GB' : 'es-ES')}`;
+      cx.save(); cx.globalAlpha = 0.07; cx.fillStyle = '#000'; cx.font = `500 ${Math.max(12, w / 55)}px Geist, sans-serif`;
+      cx.translate(w / 2, h / 2); cx.rotate(-Math.PI / 9);
+      const step = w / 2.2;
+      for (let y = -h; y <= h; y += h / 4) for (let x = -w; x <= w; x += step) cx.fillText(mark, x, y);
+      cx.restore();
+      $('count').textContent = ` ${i + 1} / ${bitmaps.length} `;
+      $('prev').disabled = i === 0; $('next').disabled = i === bitmaps.length - 1;
+    };
+    const go = n => {
+      n = Math.max(0, Math.min(bitmaps.length - 1, n)); if (n === i) return;
+      const secs = Math.round((Date.now() - shownAt) / 1000);
+      if (secs >= 1) send('slide', { slide: i + 1, seconds: secs });
+      i = n; shownAt = Date.now(); draw();
+    };
+    $('prev').onclick = e => { e.stopPropagation(); go(i - 1); };
+    $('next').onclick = e => { e.stopPropagation(); go(i + 1); };
+    addEventListener('keydown', e => {
+      if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); go(i + 1); }
+      else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); go(i - 1); }
+    });
+    cv.addEventListener('click', e => { const r = cv.getBoundingClientRect(); go(i + (e.clientX - r.left < r.width / 3 ? -1 : 1)); });
+    let tx = null;
+    addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); tx = null; });
+    addEventListener('resize', draw);
+    const leave = () => { const secs = Math.round((Date.now() - shownAt) / 1000); if (P && bitmaps.length && secs >= 1) send('slide', { slide: i + 1, seconds: secs }, true); shownAt = Date.now(); };
+    addEventListener('pagehide', leave);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') leave(); else shownAt = Date.now(); });
+
+    /* a different link opened in the same tab only changes the #fragment: start over */
+    addEventListener('hashchange', () => { if (location.hash.length > 1) location.reload(); });
+
+    /* ---- open: verify the link, check expiry, decrypt, show ---- */
+    (async () => {
+      try {
+        let frag = location.hash.slice(1);
+        try { if (frag) sessionStorage.setItem('cl_tok', frag); else frag = sessionStorage.getItem('cl_tok') || ''; } catch (e) { /* no storage */ }
+        const [pb, sb] = frag.split('.');
+        if (!pb || !sb) return show(T.es.bad, T.es.badp);
+        const key = await crypto.subtle.importKey('jwk', PUBKEY, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
+        const payloadBytes = b64d(pb);
+        const ok = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, key, b64d(sb), payloadBytes);
+        if (!ok) return show(T.es.bad, T.es.badp);
+        P = JSON.parse(new TextDecoder().decode(payloadBytes));
+        t = T[P.l] || T.es; document.documentElement.lang = P.l; $('mt').textContent = t.loading;
+        history.replaceState(null, '', location.pathname);   /* the token leaves the address bar */
+
+        if (now() > P.x) return expire('hard_expiry');
+        const fk = 'cl_first_' + P.i; let first = null;
+        try { first = parseFloat(localStorage.getItem(fk)); if (!first) { first = now(); localStorage.setItem(fk, String(first)); } } catch (e) { first = now(); }
+        if (now() - first > P.w) return expire('window');
+        try {
+          const rv = await (await fetch('revoked.json?t=' + Date.now(), { cache: 'no-store' })).json();
+          if ((rv.revoked || []).includes(P.i)) return expire('revoked');
+        } catch (e) { /* no list: carry on */ }
+
+        const dk = await crypto.subtle.importKey('raw', b64d(P.k), { name: 'AES-GCM' }, false, ['decrypt']);
+        const n = SLIDES[P.l] || SLIDES.es; const lang = SLIDES[P.l] ? P.l : 'es';
+        const bufs = await Promise.all(Array.from({ length: n }, (_, j) => fetch(`s/${lang}-${j + 1}.bin`).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })));
+        for (const b of bufs) {
+          const u = new Uint8Array(b);
+          const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: u.slice(0, 12) }, dk, u.slice(12));
+          bitmaps.push(await createImageBitmap(new Blob([pt], { type: 'image/webp' })));
+        }
+        P.k = null;
+        $('who').textContent = `${P.n} · ${P.c}`;
+        $('msg').classList.add('hide'); $('deck').style.display = 'block'; shownAt = Date.now(); draw();
+        send('open', { slide: 1 });
+        /* close the deck when the window runs out, even if the page stays open */
+        const left = (first + P.w - now()) * 1000;
+        setTimeout(() => { leave(); expire('window'); }, Math.max(0, Math.min(left, P.x * 1000 - Date.now(), 2147483000)));
+      } catch (e) {
+        show(t.err, t.errp); send('error', { reason: String(e && e.message || e).slice(0, 120) });
+      }
+    })();
+  })();
+  </script>
+</body>
+</html>
