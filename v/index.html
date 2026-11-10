@@ -80,6 +80,7 @@
     addEventListener('keydown', e => {
       const k = (e.key || '').toLowerCase();
       if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'c', 'u', 'a'].includes(k)) { e.preventDefault(); e.stopPropagation(); }
+      if (k === 'f12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(k))) { e.preventDefault(); e.stopPropagation(); }
       if (k === 'printscreen') { e.preventDefault(); }
     }, true);
     addEventListener('beforeprint', () => send('print_attempt'));
