@@ -101,8 +101,9 @@
       const mark = `${P.n} · ${P.c} · ${new Date().toLocaleDateString(P.l === 'en' ? 'en-GB' : 'es-ES')}`;
       cx.save(); cx.globalAlpha = 0.16; cx.fillStyle = '#8F8D87'; cx.font = `500 ${Math.max(12, w / 55)}px Geist, sans-serif`;  /* mid-grey: shows on light and dark slides */
       cx.translate(w / 2, h / 2); cx.rotate(-Math.PI / 9);
-      const step = w / 2.2;
-      for (let y = -h; y <= h; y += h / 4) for (let x = -w; x <= w; x += step) cx.fillText(mark, x, y);
+      const step = cx.measureText(mark).width + w / 12;   /* one copy after another, never overlapping */
+      let row = 0;
+      for (let y = -h; y <= h; y += h / 4, row++) for (let x = -w - (row % 2) * step / 2; x <= w; x += step) cx.fillText(mark, x, y);
       cx.restore();
       $('count').textContent = ` ${i + 1} / ${bitmaps.length} `;
       $('prev').disabled = i === 0; $('next').disabled = i === bitmaps.length - 1;
