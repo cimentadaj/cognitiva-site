@@ -99,7 +99,7 @@
       cx.drawImage(bm, 0, 0, w, h);
       /* watermark: who it was sent to, repeated faintly across the slide */
       const mark = `${P.n} · ${P.c} · ${new Date().toLocaleDateString(P.l === 'en' ? 'en-GB' : 'es-ES')}`;
-      cx.save(); cx.globalAlpha = 0.07; cx.fillStyle = '#000'; cx.font = `500 ${Math.max(12, w / 55)}px Geist, sans-serif`;
+      cx.save(); cx.globalAlpha = 0.16; cx.fillStyle = '#8F8D87'; cx.font = `500 ${Math.max(12, w / 55)}px Geist, sans-serif`;  /* mid-grey: shows on light and dark slides */
       cx.translate(w / 2, h / 2); cx.rotate(-Math.PI / 9);
       const step = w / 2.2;
       for (let y = -h; y <= h; y += h / 4) for (let x = -w; x <= w; x += step) cx.fillText(mark, x, y);
